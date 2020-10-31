@@ -1,7 +1,7 @@
 import 'package:flutter/animation.dart';
 import 'package:pokeball_anim/solution3/framework/interpolatable_object.dart';
 
-class KeyFrame<T extends InterpolatableObject> {
+class KeyFrame<T extends InterpolatableObjectMixin> {
   final double weight;
   final T begin;
   final T end;
@@ -10,7 +10,7 @@ class KeyFrame<T extends InterpolatableObject> {
   KeyFrame({this.weight = 1.0, this.begin, this.end, this.curve = Curves.linear});
 }
 
-class AnimatableObject<T extends InterpolatableObject> extends TweenSequence<T> {
+class AnimatableObject<T extends InterpolatableObjectMixin> extends TweenSequence<T> {
 
   AnimatableObject._(List<TweenSequenceItem<T>> items): super(items);
 

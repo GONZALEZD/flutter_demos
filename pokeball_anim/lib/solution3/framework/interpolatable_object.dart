@@ -1,6 +1,20 @@
-import 'package:flutter/material.dart' show Color, factory;
+import 'package:flutter/material.dart' show Color, factory, protected;
 
-class InterpolatableColor with InterpolatableObject {
+abstract class InterpolatableObject with InterpolatableObjectMixin {
+  final Map<String, dynamic> _data;
+
+  InterpolatableObject({Map<String, dynamic> data}) : _data = data;
+
+  @override
+  Map<String, dynamic> getAttributes() => _data;
+
+  @protected
+  dynamic get(String key) => _data.containsKey(key)
+      ? _data[key]
+      : throw "Unknown key '$key' for interpolatable object '$runtimeType'";
+}
+
+class InterpolatableColor with InterpolatableObjectMixin {
   double a, r, g, b;
 
   InterpolatableColor({this.a, this.r, this.b, this.g});
@@ -28,17 +42,17 @@ class InterpolatableColor with InterpolatableObject {
   String toString() => this.color.toString();
 }
 
-mixin InterpolatableObject {
+mixin InterpolatableObjectMixin {
   Map<String, dynamic> getAttributes();
 
   @factory
-  InterpolatableObject instanceWithAttributes(Map<String, dynamic> from);
+  InterpolatableObjectMixin instanceWithAttributes(Map<String, dynamic> from);
 
-  operator +(InterpolatableObject other) {
+  operator +(InterpolatableObjectMixin other) {
     return _process((a, b) => a + b, other.getAttributes());
   }
 
-  operator -(InterpolatableObject other) {
+  operator -(InterpolatableObjectMixin other) {
     return _process((a, b) => a - b, other.getAttributes());
   }
 
@@ -47,7 +61,7 @@ mixin InterpolatableObject {
     return _process((a, b) => a * b, other);
   }
 
-  InterpolatableObject _process<T>(T Function(T a, T b) process, Map other) {
+  InterpolatableObjectMixin _process<T>(T Function(T a, T b) process, Map other) {
     var newAttributes = this.getAttributes().map((key, value) {
       if (value == null || other[key] == null) {
         return MapEntry(key, other[key]);

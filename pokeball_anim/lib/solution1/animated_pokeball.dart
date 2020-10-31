@@ -19,9 +19,12 @@ class AnimatedPokeballState extends AnimatedPlayerState {
 
   AnimatedPokeballState() : super(resetAnimationsOnUpdate: true);
 
-  Interval get _jumbInterval => Interval(0.0, 4.5 / 17.5);
+  final double __jumpWeight = 4.5;
+  final double __shakeWeight = 13.0;
 
-  Interval get _shakeInterval => Interval(4.5 / 17.5, 1.0);
+  Interval get _jumbInterval => Interval(0.0, __jumpWeight / (__jumpWeight + __shakeWeight));
+
+  Interval get _shakeInterval => Interval(__jumpWeight / (__jumpWeight + __shakeWeight), 1.0);
 
   @override
   AnimatedBuilder buildAnimatedPokeball(BuildContext context) {
@@ -58,11 +61,11 @@ class AnimatedPokeballState extends AnimatedPlayerState {
   void _createRotationAnimation() {
     _rotation = TweenSequence([
       TweenSequenceItem(
-          weight: 4.5,
-          tween: __createJumpSequence(-math.pi*6, -math.pi*2, 0.0),
+        weight: __jumpWeight,
+        tween: __createJumpSequence(-math.pi * 6, -math.pi * 2, 0.0),
       ),
       TweenSequenceItem(
-        weight: 13.0,
+        weight: __shakeWeight,
         tween: __createShakeSequence(0.0, math.pi / 4, 0.0),
       ),
     ]).animate(this.animationController);
@@ -76,9 +79,12 @@ class AnimatedPokeballState extends AnimatedPlayerState {
 
   void _createButtonColorAnimation() {
     _buttonColor = TweenSequence([
-      TweenSequenceItem(weight: 4.5, tween: ColorTween(begin: Colors.white, end: Colors.white)),
       TweenSequenceItem(
-        weight: 13.0,
+        weight: __jumpWeight,
+        tween: ColorTween(begin: Colors.white, end: Colors.white),
+      ),
+      TweenSequenceItem(
+        weight: __shakeWeight,
         tween: __createShakeSequence(
           Colors.red.shade100,
           Colors.redAccent,

@@ -21,7 +21,7 @@ class _AnimatedPokeballState extends AnimatedPlayerState {
     return AnimatedBuilder(
         animation: _animation,
         builder: (context, child) {
-          var pokeballData = _animation.value;
+          final pokeballData = _animation.value;
           return PokeballWidget(
             size: pokeballData.size,
             offsetX: pokeballData.offsetX,
