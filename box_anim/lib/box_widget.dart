@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:box_anim/box_shape.dart';
 
-class OpenedParcel extends StatelessWidget {
-  final double openedRadian;
-  final Size size;
-  final Color color;
+class MyBox extends StatelessWidget {
+  final MyBoxShape shape;
 
   static const __paneThickness = 3.0;
 
-  OpenedParcel({this.openedRadian, this.size, this.color});
+  MyBox({this.shape});
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +29,9 @@ class OpenedParcel extends StatelessWidget {
 
   Widget buildBox() {
     return Container(
-      constraints: BoxConstraints.tight(this.size + Offset(0.0, -__paneThickness)),
+      constraints: BoxConstraints.tight(this.shape.size + Offset(0.0, -__paneThickness)),
       decoration: BoxDecoration(
-        color: this.color,
+        color: this.shape.color,
         borderRadius: const BorderRadius.vertical(bottom: const Radius.circular(4.0)),
       ),
     );
@@ -40,13 +39,13 @@ class OpenedParcel extends StatelessWidget {
 
   Widget buildPane(Alignment alignment) {
     return Transform.rotate(
-      angle: this.openedRadian * alignment.x,
+      angle: this.shape.paneRotation * alignment.x,
       alignment: alignment,
       child: Container(
-        width: this.size.width / 2,
+        width: this.shape.size.width / 2,
         height: __paneThickness,
         decoration: BoxDecoration(
-          color: this.color,
+          color: this.shape.color,
           borderRadius: const BorderRadius.all(Radius.circular(__paneThickness)),
         ),
       ),

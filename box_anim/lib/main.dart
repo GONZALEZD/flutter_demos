@@ -1,4 +1,4 @@
-import 'package:box_anim/animated_parcel.dart';
+import 'package:box_anim/animated_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
