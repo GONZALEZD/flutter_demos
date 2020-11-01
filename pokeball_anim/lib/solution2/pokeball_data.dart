@@ -1,4 +1,5 @@
 import 'package:flutter/painting.dart' show Color;
+import 'dart:ui' as ui show lerpDouble;
 
 class PokeballData {
   final double size;
@@ -58,14 +59,12 @@ class PokeballData {
       return b;
     }
 
-    var lerpDouble = (a, b, t) => a + (b - a) * t;
-
     return PokeballData(
-      size: lerpDouble(a.size, b.size, t),
-      rotation: lerpDouble(a.rotation, b.rotation, t),
-      altitude: lerpDouble(a.altitude, b.altitude, t),
-      offsetX: lerpDouble(a.offsetX, b.offsetX, t),
-      buttonBlurWidth: lerpDouble(a.buttonBlurWidth, b.buttonBlurWidth, t),
+      size: ui.lerpDouble(a.size, b.size, t),
+      rotation: ui.lerpDouble(a.rotation, b.rotation, t),
+      altitude: ui.lerpDouble(a.altitude, b.altitude, t),
+      offsetX: ui.lerpDouble(a.offsetX, b.offsetX, t),
+      buttonBlurWidth: ui.lerpDouble(a.buttonBlurWidth, b.buttonBlurWidth, t),
       buttonColor: Color.lerp(a.buttonColor, b.buttonColor, t),
     );
   }
