@@ -3,7 +3,6 @@ import 'dart:ui';
 
 import 'package:curvy_curves/graph_painter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/physics.dart';
 
 class CurvePresenter extends StatefulWidget {
   final Animatable curve;

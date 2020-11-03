@@ -1,4 +1,5 @@
 import 'package:flutter/animation.dart';
+import 'package:curvy_curves/closed_curves.dart';
 
 class NamedCurves {
   static final all  = _getCurves();
@@ -51,6 +52,8 @@ class NamedCurves {
       "Interval(0.25, 0.75)": Interval(0.25, 0.75),
       "SawTooth(3)": SawTooth(3),
       "Threshold(0.66)": Threshold(0.66),
+      "Sinus": ClosedCurves.sinus,
+      "Cosinus": ClosedCurves.cosinus,
     };
   }
 }
