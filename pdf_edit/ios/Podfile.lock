@@ -1,0 +1,28 @@
+PODS:
+  - Flutter (1.0.0)
+  - path_provider (0.0.1):
+    - Flutter
+  - pdf_image_renderer (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - pdf_image_renderer (from `.symlinks/plugins/pdf_image_renderer/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  path_provider:
+    :path: ".symlinks/plugins/path_provider/ios"
+  pdf_image_renderer:
+    :path: ".symlinks/plugins/pdf_image_renderer/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
+  pdf_image_renderer: dc5cf3f09a47e742ed9438adda12d2f386993bc6
+
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+
+COCOAPODS: 1.8.4
