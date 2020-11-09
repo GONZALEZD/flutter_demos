@@ -20,13 +20,10 @@ class _PdfFileHandler {
     assert(filename != null);
     final byteData = await rootBundle.load(filename);
     var name = filename.split(Platform.pathSeparator).last;
-    var absoluteName = '${(await getApplicationDocumentsDirectory()).path}/$name';
+    var absoluteName = '${(await getLibraryDirectory()).path}/$name';
     final file = File(absoluteName);
 
-    await file.writeAsBytes(byteData.buffer.asUint8List(
-      byteData.offsetInBytes,
-      byteData.lengthInBytes,
-    ));
+    await file.writeAsBytes(byteData.buffer.asUint8List());
 
     return file;
   }
@@ -55,11 +52,10 @@ class _PdfFileHandler {
     return images;
   }
 
-  static Future<File> save(PdfMutableDocument document, String filename, {String directory}) async {
-    final doc = document.build();
+  static Future<File> save(pdfWidgets.Document document, String filename, {String directory}) async {
     final dir = directory ?? (await getApplicationDocumentsDirectory()).path;
     final file = File('$dir${Platform.pathSeparator}$filename');
-    return file.writeAsBytes(doc.save());
+    return file.writeAsBytes(document.save());
   }
 }
 
@@ -122,6 +118,6 @@ class PdfMutableDocument {
   }
 
   Future<void> save({String filename}) async {
-    _PdfFileHandler.save(this, filename ?? _filePath);
+    _PdfFileHandler.save(build(), filename ?? _filePath);
   }
 }

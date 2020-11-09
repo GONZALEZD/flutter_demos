@@ -31,14 +31,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  void _load() async {
+  void _edit() async {
     PdfMutableDocument doc = await PdfMutableDocument.asset("assets/test.pdf");
-    editDocument(doc);
+    _editDocument(doc);
     await doc.save(filename: "modified.pdf");
     print("PDF Edition Done");
   }
 
-  void editDocument(PdfMutableDocument document) {
+  void _editDocument(PdfMutableDocument document) {
     var page = document.getPage(0);
     page.add(item: pdfWidget.Positioned(
       left: 0.0,
@@ -65,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Container(),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: _load,
+        onPressed: _edit,
         tooltip: 'Load',
         icon: Icon(Icons.file_download),
         label: Text("Modify"),
