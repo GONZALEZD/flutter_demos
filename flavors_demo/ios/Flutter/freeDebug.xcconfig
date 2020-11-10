@@ -1,0 +1,6 @@
+#include "Generated.xcconfig"
+
+FLUTTER_TARGET=lib/main-free.dart
+
+ASSET_PREFIX=free
+BUNDLE_NAME=Demo Free Version (with advertisements)
