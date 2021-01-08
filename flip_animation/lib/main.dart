@@ -31,14 +31,14 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
-  bool _displayFront;
+class _MyHomePageState extends State<MyHomePage> {
+  bool _showFrontSide;
   bool _flipXAxis;
 
   @override
   void initState() {
     super.initState();
-    _displayFront = true;
+    _showFrontSide = true;
     _flipXAxis = true;
   }
 
@@ -49,8 +49,13 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         title: Text(this.widget.title),
         centerTitle: true,
         actions: [
-          IconButton(icon: RotatedBox(child: Icon(Icons.flip), quarterTurns: _flipXAxis ? 0 : 1,),
-            onPressed: _changeRotationAxis,),
+          IconButton(
+            icon: RotatedBox(
+              child: Icon(Icons.flip),
+              quarterTurns: _flipXAxis ? 0 : 1,
+            ),
+            onPressed: _changeRotationAxis,
+          ),
         ],
       ),
       body: DefaultTextStyle(
@@ -74,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   void _switchCard() {
     setState(() {
-      _displayFront = !_displayFront;
+      _showFrontSide = !_showFrontSide;
     });
   }
 
@@ -82,10 +87,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     return GestureDetector(
       onTap: _switchCard,
       child: AnimatedSwitcher(
-        duration: Duration(milliseconds: 1200),
+        duration: Duration(milliseconds: 4600),
         transitionBuilder: __transitionBuilder,
         layoutBuilder: (widget, list) => Stack(children: [widget, ...list]),
-        child: _displayFront ? _buildFront() : _buildRear(),
+        child: _showFrontSide ? _buildFront() : _buildRear(),
         switchInCurve: Curves.easeInBack,
         switchOutCurve: Curves.easeInBack.flipped,
       ),
@@ -98,14 +103,14 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       animation: rotateAnim,
       child: widget,
       builder: (context, widget) {
-        final isUnder = (ValueKey(_displayFront) != widget.key);
+        final isUnder = (ValueKey(_showFrontSide) != widget.key);
         var tilt = ((animation.value - 0.5).abs() - 0.5) * 0.003;
         tilt *= isUnder ? -1.0 : 1.0;
         final value = isUnder ? min(rotateAnim.value, pi / 2) : rotateAnim.value;
         return Transform(
-          transform: _flipXAxis ? (Matrix4.rotationY(value)
-            ..setEntry(3, 0, tilt)) : (Matrix4.rotationX(value)
-            ..setEntry(3, 1, tilt)),
+          transform: _flipXAxis
+              ? (Matrix4.rotationY(value)..setEntry(3, 0, tilt))
+              : (Matrix4.rotationX(value)..setEntry(3, 1, tilt)),
           child: widget,
           alignment: Alignment.center,
         );
@@ -143,25 +148,35 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     );
   }
 
-
   Widget __buildLayout({Key key, Widget child, String faceName, Color backgroundColor}) {
     return Container(
       key: key,
       decoration: BoxDecoration(
+        shape: BoxShape.rectangle,
+        borderRadius: BorderRadius.circular(20.0),
         color: backgroundColor,
-        borderRadius: BorderRadius.circular(12.0),
       ),
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          child,
-          Positioned(
-            bottom: 8.0,
-            right: 8.0,
-            child: Text(faceName),
-          ),
-        ],
+      child: Center(
+        child: Text(faceName.substring(0, 1), style: TextStyle(fontSize: 80.0)),
       ),
     );
+    // return Container(
+    //   key: key,
+    //   decoration: BoxDecoration(
+    //     color: backgroundColor,
+    //     borderRadius: BorderRadius.circular(12.0),
+    //   ),
+    //   child: Stack(
+    //     fit: StackFit.expand,
+    //     children: [
+    //       child,
+    //       Positioned(
+    //         bottom: 8.0,
+    //         right: 8.0,
+    //         child: Text(faceName),
+    //       ),
+    //     ],
+    //   ),
+    // );
   }
 }
