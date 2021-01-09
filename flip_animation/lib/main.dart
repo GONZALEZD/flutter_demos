@@ -87,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return GestureDetector(
       onTap: _switchCard,
       child: AnimatedSwitcher(
-        duration: Duration(milliseconds: 4600),
+        duration: Duration(milliseconds: 800),
         transitionBuilder: __transitionBuilder,
         layoutBuilder: (widget, list) => Stack(children: [widget, ...list]),
         child: _showFrontSide ? _buildFront() : _buildRear(),
