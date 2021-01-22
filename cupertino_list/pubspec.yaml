@@ -33,9 +33,7 @@ dependencies:
   scroll_to_index: ^1.0.6
 
   # Cupertino list view
-#  cupertino_listview: ^1.0.3
-  cupertino_listview:
-    path: /Users/david/FlutterProjects/cupertino_listview/
+  cupertino_listview: ^1.0.4
 
 
 dev_dependencies:
