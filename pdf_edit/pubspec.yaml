@@ -33,7 +33,7 @@ dependencies:
   pdf_image_renderer: ^0.3.2
 
   # create pdf
-  pdf: ^1.11.2
+  pdf: ^2.1.0
 
   # path provider
   path_provider: ^1.6.24
