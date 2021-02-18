@@ -42,6 +42,7 @@ class _MyAppState extends State<MyApp> {
       debugShowMaterialGrid: debugShowMaterialGrid,
       actions: {
         DevelopmentIntent: DevelopmentAction(),
+        ToggleThemeIntent: ToggleThemeAction(),
         SendDebugDataIntent: SendDebugDataAction(),
       },
       shortcuts: _shortcuts,
@@ -53,9 +54,9 @@ class _MyAppState extends State<MyApp> {
   Map<LogicalKeySet, Intent> get _shortcuts => {
         LogicalKeySet(LogicalKeyboardKey.shift, LogicalKeyboardKey.f12):
             const SendDebugDataIntent(),
-        LogicalKeySet(LogicalKeyboardKey.f12): DevelopmentIntent(action: () {
+        LogicalKeySet(LogicalKeyboardKey.f12): ToggleThemeIntent(toggle: (brightness) {
           setState(() {
-            themeMode = (themeMode == ThemeMode.light)
+            themeMode = (brightness == Brightness.light)
                 ? ThemeMode.dark
                 : ThemeMode.light;
           });

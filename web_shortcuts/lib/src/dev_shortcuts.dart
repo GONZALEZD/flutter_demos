@@ -16,6 +16,24 @@ class DevelopmentAction extends Action<DevelopmentIntent> {
   }
 }
 
+class ToggleThemeIntent extends Intent {
+  final void Function(Brightness brightness) toggle;
+
+  ToggleThemeIntent({this.toggle});
+}
+
+class ToggleThemeAction extends ContextAction {
+  @override
+  Object invoke(covariant Intent intent, [BuildContext context]) {
+    if (kDebugMode && intent is ToggleThemeIntent) {
+      intent.toggle?.call(Theme.of(context).brightness);
+      return true;
+    }
+    return false;
+  }
+
+}
+
 class SendDebugDataIntent extends Intent {
   const SendDebugDataIntent();
 }
