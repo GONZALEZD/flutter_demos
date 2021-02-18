@@ -31,7 +31,6 @@ class ToggleThemeAction extends ContextAction {
     }
     return false;
   }
-
 }
 
 class SendDebugDataIntent extends Intent {

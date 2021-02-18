@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    final app = MaterialApp(
+    return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primaryColor: Colors.white,
@@ -48,7 +48,6 @@ class _MyAppState extends State<MyApp> {
       shortcuts: _shortcuts,
       home: MyHomePage(),
     );
-    return app;
   }
 
   Map<LogicalKeySet, Intent> get _shortcuts => {
